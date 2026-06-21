@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  name          String
+  image         String?
+  phone         String?
+  streetAddress String?
+  postalCode    String?
+  city          String?
+  country       String?
+  role          UserRole       @default(USER)
+  orders        OrderProduct[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Product {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  image       String
+  order       Int @default(autoincrement())
+  basePrice   Float
+  sizes  Size[]
+  extras Extra[]
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  orders OrderProduct[]
+  craetedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  order    Int       @default(autoincrement())
+  products Product[]
+}
+
+model Order {
+  id            String         @id @default(uuid())
+  paid          Boolean        @default(false)
+  subTotal      Float
+  deliveryFee   Float
+  totalPrice    Float
+  userEmail     String
+  phone         String
+  streetAddress String
+  postalCode    String
+  city          String
+  country       String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  products      OrderProduct[]
+}
+
+model OrderProduct {
+  id       String @id @default(cuid())
+  quantity Int
+
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  user      User?   @relation(fields: [userId], references: [id])
+  userId    String?
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Size {
+  id    String       @id @default(uuid())
+  name  productSizes
+  price Float
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Extra {
+  id    String           @id @default(uuid())
+  name  ExtraIngradiends
+  price Float
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+enum productSizes {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum ExtraIngradiends {
+  CHEESE
+  BICON
+  TOMATO
+  ONION
+  PEPPER
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
