@@ -34,9 +34,6 @@ export const POST = async (request: NextRequest) => {
       formData.get("extras") as string,
     );
 
-    console.log("sizes ========>", sizes);
-    console.log("extras ========>", extras);
-
     const categoryId = formData.get("categoryId") as string;
 
     const imageFile = formData.get("image") as File; //always get the iamge from formData not from validate

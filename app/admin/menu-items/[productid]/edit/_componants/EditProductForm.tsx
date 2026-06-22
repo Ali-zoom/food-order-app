@@ -19,14 +19,22 @@ import {
   addProuductInput,
   addProuductSchema,
 } from "@/lib/validation/addProductsSchema";
-import SelectItems from "./SelectItems";
-import Sizes from "./Sizes";
-import Extras from "./Extras";
-import React from 'react'
+import SelectItems from "@/app/admin/menu-items/_components/SelectItems";
+import Sizes from "@/app/admin/menu-items/_components/Sizes";
+import Extras from "@/app/admin/menu-items/_components/Extras";
+import { productWithRelation } from "@/types/products";
 
-const EditProductForm = () => {
-   const [selectedValue, setSelectedValue] = useState(categories[0].id);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+const EditProductForm = ({
+  categories,
+  product,
+}: {
+  categories: Category[];
+  product: productWithRelation;
+}) => {
+  const [selectedValue, setSelectedValue] = useState(product.categoryId);
+  const [selectedImage, setSelectedImage] = useState<string | null>(
+    product.image || null,
+  );
   const imageToShow = selectedImage ?? null;
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -35,8 +43,9 @@ const EditProductForm = () => {
   // const [selectedImage, setSelectedImage] = useState(
   //     "https://www.mcgill.ca/web-services/files/web-services/styles/hd/public/marco-xu-toupbco62lw-unsplash_cropped.jpg?itok=vnN8-uiS&timestamp=1708957693",
   //   );
-  const [sizes, setSizes] = useState<Partial<Size>[]>([]);
-  const [extras, setExtras] = useState<Partial<Extra>[]>([]);
+  const [sizes, setSizes] = useState<Partial<Size>[]>(product.sizes);
+  const [extras, setExtras] = useState<Partial<Extra>[]>(product.extras);
+
   const router = useRouter();
   const {
     register,
@@ -47,19 +56,14 @@ const EditProductForm = () => {
   } = useForm<addProuductInput>({
     mode: "onChange",
     resolver: zodResolver(addProuductSchema),
-    defaultValues: {},
+    defaultValues: {
+      itemName: product.name,
+      description: product.description,
+      basePrice: String(product.basePrice),
+    },
   });
 
   const onSubmit = async (data: addProuductInput) => {
-    if (!selectedFile || selectedFile === null) {
-      setImageError("no file choosen");
-      return;
-    }
-
-    if (imageError) {
-      return;
-    }
-
     if (!selectedValue || selectedValue === undefined) {
       return;
     }
@@ -78,12 +82,12 @@ const EditProductForm = () => {
       formData.append("image", selectedFile);
     }
     try {
-      await axios.post("/api/products", formData, {
+      await axios.put(`/api/products/${product.id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      toast.success("product added", { position: "top-center" });
+      toast.success("product updated", { position: "top-center" });
       router.push("/admin/menu-items");
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -214,9 +218,9 @@ const EditProductForm = () => {
       </div>
     </div>
   );
-}
+};
 
-export default EditProductForm
+export default EditProductForm;
 
 const UploadImage = ({
   setSelectedImage,

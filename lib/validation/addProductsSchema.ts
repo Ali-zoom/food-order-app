@@ -37,3 +37,14 @@ export const addProuductSchema = z.object({
 });
 // ✅ Type inference (this is why Zod is powerful)
 export type addProuductInput = z.infer<typeof addProuductSchema>;
+
+export const updateProuductSchema = z.object({
+  itemName: z.string().trim().min(1, { message: "name required" }),
+  description: z
+    .string()
+    .trim()
+    .min(5, { message: "description at least 5 char" }),
+  basePrice: z.string().min(1, "Price is required"),
+});
+
+export type updateProuductInput = z.infer<typeof updateProuductSchema>;

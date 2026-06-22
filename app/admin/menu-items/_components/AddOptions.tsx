@@ -147,6 +147,7 @@ const SelectSizes = ({
 
   return (
     <Select
+      value={item.name ?? ""}
       onValueChange={(value) => {
         onChange(
           { target: { value } } as React.ChangeEvent<HTMLInputElement>,
