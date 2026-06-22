@@ -22,9 +22,10 @@ import {
 import SelectItems from "./SelectItems";
 import Sizes from "./Sizes";
 import Extras from "./Extras";
+import React from 'react'
 
-const FormAddProduct = ({ categories }: { categories: Category[] }) => {
-  const [selectedValue, setSelectedValue] = useState(categories[0].id);
+const EditProductForm = () => {
+   const [selectedValue, setSelectedValue] = useState(categories[0].id);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const imageToShow = selectedImage ?? null;
 
@@ -213,9 +214,9 @@ const FormAddProduct = ({ categories }: { categories: Category[] }) => {
       </div>
     </div>
   );
-};
+}
 
-export default FormAddProduct;
+export default EditProductForm
 
 const UploadImage = ({
   setSelectedImage,

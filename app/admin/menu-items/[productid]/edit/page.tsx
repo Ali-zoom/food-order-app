@@ -1,4 +1,6 @@
-import { getProducts } from "@/server/db/product";
+
+import { getProducts, getSingleProduct } from "@/server/db/product";
+import { productWithRelation } from "@/types/products";
 import React from "react";
 
 export async function generateStaticParams() {
@@ -10,11 +12,15 @@ export async function generateStaticParams() {
 interface IProps {
   params: Promise<{
     productid: string;
-  }>;
+  }>,
+  
 }
 const EditProductPage = async ({ params }: IProps) => {
   const { productid } = await params;
-  return <div>hello product {productid}</div>;
+  const product:productWithRelation | null=await getSingleProduct(productid);
+  if(!product)return <div>product not found</div>
+  return (
+   <div>ccc</div>
+  );
 };
 
-export default EditProductPage;
