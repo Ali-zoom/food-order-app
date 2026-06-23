@@ -87,7 +87,7 @@ model Size {
   price Float
 
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id],onDelete: Cascade)
 }
 
 model Extra {
@@ -96,7 +96,7 @@ model Extra {
   price Float
 
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id],onDelete: Cascade)
 }
 
 enum productSizes {

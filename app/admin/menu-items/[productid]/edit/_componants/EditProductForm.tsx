@@ -47,6 +47,36 @@ const EditProductForm = ({
   const [extras, setExtras] = useState<Partial<Extra>[]>(product.extras);
 
   const router = useRouter();
+
+const handelDeleteProuct=async(id:string)=>{
+   try {
+      await axios.delete(`/api/products/${id}`,{
+        
+      }, );
+      toast.success("product deleted", { position: "top-center" });
+      router.push("/admin/menu-items");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message, {
+          position: "top-center",
+          className:
+            "!bg-red-500 !text-white !border !border-red-700 !rounded-xl !shadow-lg",
+        });
+        console.log(error.response?.data);
+        console.log(error.message);
+      } else {
+        toast.error("Unknown error", {
+          position: "top-center",
+          className:
+            "!bg-red-500 !text-white !border !border-red-700 !rounded-xl !shadow-lg",
+        });
+        console.log("Unknown error", error);
+      }
+    }
+}
+
+
+
   const {
     register,
     handleSubmit,
@@ -211,8 +241,14 @@ const EditProductForm = ({
                 <Extras extras={extras} setExtras={setExtras} />
               </Field>
             </FieldGroup>
-
-            <Button className="w-full">save</Button>
+<div className="flex gap">
+   <Button className="flex-1">save</Button>
+   <Button
+   onClick={() => handelDeleteProuct(product.id)}
+   type="button"  className="flex-1 bg-red-500">
+    delete</Button>
+</div>
+            
           </FieldSet>
         </form>
       </div>

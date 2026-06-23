@@ -122,7 +122,54 @@ export const PUT = async (request: NextRequest, { params }: Iparams) => {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { success: false, message: "unacpected error accured" },
+      { success: false, message: "unexpected error occurred" },
+      { status: 500 },
+    );
+  }
+};
+
+
+export const DELETE = async (request: NextRequest, { params }: Iparams) => {
+  try {
+    const { productID } = await params;
+    const product = await prisma.product.findUnique({
+      where: { id: productID },
+    });
+
+    if (!product) {
+      return NextResponse.json(
+        { success: false, message: "product not found" },
+        { status: 400 },
+      );
+    }
+   
+    
+      await prisma.product.delete({
+        where: {
+          id: productID,
+        },
+       
+      });
+
+     
+    
+
+     
+
+   
+
+    // Revalidate ALL relevant paths
+    revalidatePath("/admin");
+
+    revalidatePath("/");
+    revalidatePath("/menu");
+    revalidatePath("/admin/menu-items");
+
+    return NextResponse.json({ success: true, message: "ok" }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { success: false, message: "unexpected error occurred" },
       { status: 500 },
     );
   }
