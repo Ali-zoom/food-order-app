@@ -52,6 +52,19 @@ model Category {
   products Product[]
 }
 
+enum OrderStatus {
+  PENDING
+  PREPARING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  PAY_ON_DELIVERY
+  ONLINE
+}
+
 model Order {
   id            String         @id @default(uuid())
   paid          Boolean        @default(false)
