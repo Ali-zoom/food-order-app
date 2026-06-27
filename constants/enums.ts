@@ -125,3 +125,16 @@ export enum ExtraIngradiends {
   ONION = "ONION",
   PEPPER = "PEPPER",
 }
+
+export enum OrderStatus {
+  PENDING = "PENDING",
+  PREPARING = "PREPARING",
+  OUT_FOR_DELIVERY = "OUT_FOR_DELIVERY",
+  DELIVERED = "DELIVERED",
+  CANCELLED = "CANCELLED",
+}
+
+export enum PaymentMethod {
+  PAY_ON_DELIVERY = "PAY_ON_DELIVERY",
+  ONLINE = "ONLINE",
+}

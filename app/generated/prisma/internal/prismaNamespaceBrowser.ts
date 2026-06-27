@@ -131,6 +131,8 @@ export const OrderScalarFieldEnum = {
   postalCode: 'postalCode',
   city: 'city',
   country: 'country',
+  status: 'status',
+  paymentMethod: 'paymentMethod',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

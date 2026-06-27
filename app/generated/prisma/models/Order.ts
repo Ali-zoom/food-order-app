@@ -50,6 +50,8 @@ export type OrderMinAggregateOutputType = {
   postalCode: string | null
   city: string | null
   country: string | null
+  status: $Enums.OrderStatus | null
+  paymentMethod: $Enums.PaymentMethod | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +68,8 @@ export type OrderMaxAggregateOutputType = {
   postalCode: string | null
   city: string | null
   country: string | null
+  status: $Enums.OrderStatus | null
+  paymentMethod: $Enums.PaymentMethod | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -82,6 +86,8 @@ export type OrderCountAggregateOutputType = {
   postalCode: number
   city: number
   country: number
+  status: number
+  paymentMethod: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -112,6 +118,8 @@ export type OrderMinAggregateInputType = {
   postalCode?: true
   city?: true
   country?: true
+  status?: true
+  paymentMethod?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -128,6 +136,8 @@ export type OrderMaxAggregateInputType = {
   postalCode?: true
   city?: true
   country?: true
+  status?: true
+  paymentMethod?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -144,6 +154,8 @@ export type OrderCountAggregateInputType = {
   postalCode?: true
   city?: true
   country?: true
+  status?: true
+  paymentMethod?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -247,6 +259,8 @@ export type OrderGroupByOutputType = {
   postalCode: string
   city: string
   country: string
+  status: $Enums.OrderStatus
+  paymentMethod: $Enums.PaymentMethod
   createdAt: Date
   updatedAt: Date
   _count: OrderCountAggregateOutputType | null
@@ -286,6 +300,8 @@ export type OrderWhereInput = {
   postalCode?: Prisma.StringFilter<"Order"> | string
   city?: Prisma.StringFilter<"Order"> | string
   country?: Prisma.StringFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   products?: Prisma.OrderProductListRelationFilter
@@ -303,6 +319,8 @@ export type OrderOrderByWithRelationInput = {
   postalCode?: Prisma.SortOrder
   city?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   products?: Prisma.OrderProductOrderByRelationAggregateInput
@@ -323,6 +341,8 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   postalCode?: Prisma.StringFilter<"Order"> | string
   city?: Prisma.StringFilter<"Order"> | string
   country?: Prisma.StringFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFilter<"Order"> | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   products?: Prisma.OrderProductListRelationFilter
@@ -340,6 +360,8 @@ export type OrderOrderByWithAggregationInput = {
   postalCode?: Prisma.SortOrder
   city?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrderCountOrderByAggregateInput
@@ -364,6 +386,8 @@ export type OrderScalarWhereWithAggregatesInput = {
   postalCode?: Prisma.StringWithAggregatesFilter<"Order"> | string
   city?: Prisma.StringWithAggregatesFilter<"Order"> | string
   country?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodWithAggregatesFilter<"Order"> | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
 }
@@ -380,6 +404,8 @@ export type OrderCreateInput = {
   postalCode: string
   city: string
   country: string
+  status?: $Enums.OrderStatus
+  paymentMethod?: $Enums.PaymentMethod
   createdAt?: Date | string
   updatedAt?: Date | string
   products?: Prisma.OrderProductCreateNestedManyWithoutOrderInput
@@ -397,6 +423,8 @@ export type OrderUncheckedCreateInput = {
   postalCode: string
   city: string
   country: string
+  status?: $Enums.OrderStatus
+  paymentMethod?: $Enums.PaymentMethod
   createdAt?: Date | string
   updatedAt?: Date | string
   products?: Prisma.OrderProductUncheckedCreateNestedManyWithoutOrderInput
@@ -414,6 +442,8 @@ export type OrderUpdateInput = {
   postalCode?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.OrderProductUpdateManyWithoutOrderNestedInput
@@ -431,6 +461,8 @@ export type OrderUncheckedUpdateInput = {
   postalCode?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.OrderProductUncheckedUpdateManyWithoutOrderNestedInput
@@ -448,6 +480,8 @@ export type OrderCreateManyInput = {
   postalCode: string
   city: string
   country: string
+  status?: $Enums.OrderStatus
+  paymentMethod?: $Enums.PaymentMethod
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -464,6 +498,8 @@ export type OrderUpdateManyMutationInput = {
   postalCode?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -480,6 +516,8 @@ export type OrderUncheckedUpdateManyInput = {
   postalCode?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -496,6 +534,8 @@ export type OrderCountOrderByAggregateInput = {
   postalCode?: Prisma.SortOrder
   city?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -518,6 +558,8 @@ export type OrderMaxOrderByAggregateInput = {
   postalCode?: Prisma.SortOrder
   city?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -534,6 +576,8 @@ export type OrderMinOrderByAggregateInput = {
   postalCode?: Prisma.SortOrder
   city?: Prisma.SortOrder
   country?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -551,6 +595,14 @@ export type OrderScalarRelationFilter = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type EnumOrderStatusFieldUpdateOperationsInput = {
+  set?: $Enums.OrderStatus
+}
+
+export type EnumPaymentMethodFieldUpdateOperationsInput = {
+  set?: $Enums.PaymentMethod
 }
 
 export type OrderCreateNestedOneWithoutProductsInput = {
@@ -579,6 +631,8 @@ export type OrderCreateWithoutProductsInput = {
   postalCode: string
   city: string
   country: string
+  status?: $Enums.OrderStatus
+  paymentMethod?: $Enums.PaymentMethod
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -595,6 +649,8 @@ export type OrderUncheckedCreateWithoutProductsInput = {
   postalCode: string
   city: string
   country: string
+  status?: $Enums.OrderStatus
+  paymentMethod?: $Enums.PaymentMethod
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -627,6 +683,8 @@ export type OrderUpdateWithoutProductsInput = {
   postalCode?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -643,6 +701,8 @@ export type OrderUncheckedUpdateWithoutProductsInput = {
   postalCode?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -690,6 +750,8 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   postalCode?: boolean
   city?: boolean
   country?: boolean
+  status?: boolean
+  paymentMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   products?: boolean | Prisma.Order$productsArgs<ExtArgs>
@@ -708,6 +770,8 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   postalCode?: boolean
   city?: boolean
   country?: boolean
+  status?: boolean
+  paymentMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["order"]>
@@ -724,6 +788,8 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   postalCode?: boolean
   city?: boolean
   country?: boolean
+  status?: boolean
+  paymentMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["order"]>
@@ -740,11 +806,13 @@ export type OrderSelectScalar = {
   postalCode?: boolean
   city?: boolean
   country?: boolean
+  status?: boolean
+  paymentMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "paid" | "subTotal" | "deliveryFee" | "totalPrice" | "userEmail" | "phone" | "streetAddress" | "postalCode" | "city" | "country" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "paid" | "subTotal" | "deliveryFee" | "totalPrice" | "userEmail" | "phone" | "streetAddress" | "postalCode" | "city" | "country" | "status" | "paymentMethod" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | Prisma.Order$productsArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -769,6 +837,8 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     postalCode: string
     city: string
     country: string
+    status: $Enums.OrderStatus
+    paymentMethod: $Enums.PaymentMethod
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["order"]>
@@ -1206,6 +1276,8 @@ export interface OrderFieldRefs {
   readonly postalCode: Prisma.FieldRef<"Order", 'String'>
   readonly city: Prisma.FieldRef<"Order", 'String'>
   readonly country: Prisma.FieldRef<"Order", 'String'>
+  readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>
+  readonly paymentMethod: Prisma.FieldRef<"Order", 'PaymentMethod'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>
 }

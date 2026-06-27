@@ -77,6 +77,8 @@ model Order {
   postalCode    String
   city          String
   country       String
+   status        OrderStatus   @default(PENDING)          // 👈 new
+  paymentMethod PaymentMethod @default(PAY_ON_DELIVERY)  // 👈 ne
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   products      OrderProduct[]

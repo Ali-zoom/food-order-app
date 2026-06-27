@@ -1,7 +1,12 @@
 import CartItems from "@/components/cart/CartItems";
 import CheckOutForm from "@/components/cart/CheckOutForm";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 
-const CartPage = () => {
+const CartPage = async () => {
+  const session = await getServerSession(authOptions);
+
+  const user = session?.user;
   return (
     <section className="section-gap">
       <div className="container">
@@ -11,7 +16,7 @@ const CartPage = () => {
 
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">
           <CartItems />
-          <CheckOutForm />
+          <CheckOutForm user={user} />
         </div>
       </div>
     </section>
