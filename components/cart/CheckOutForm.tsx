@@ -46,10 +46,10 @@ const CheckOutForm = ({ user }: { user?: Session["user"] }) => {
     },
   });
 
-  const onSubmit = async (data: CheckoutFormValues) => {
+  const onSubmit = async (formdata: CheckoutFormValues) => {
     try {
-      await axios.post(`/api/orders`, {
-        ...data,
+      const res=await axios.post(`/api/orders`, {
+        ...formdata,
         subTotal: subTotal,
         deliveryFee: deliveryFee,
         totalPrice: totalWithFee,
@@ -58,6 +58,7 @@ const CheckOutForm = ({ user }: { user?: Session["user"] }) => {
         paid: false,
         status: OrderStatus.PENDING,
         paymentMethod: PaymentMethod.PAY_ON_DELIVERY,
+        userId: user?.id ?? null,
 
         // products: cart.map((item: CartItem) => ({
         //   productId: item.id,
@@ -67,6 +68,7 @@ const CheckOutForm = ({ user }: { user?: Session["user"] }) => {
         products: JSON.stringify(cart),
       });
       toast.success("order placed", { position: "top-center" });
+      router.push(`/admin/orders/${res.data.id}`);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message, {

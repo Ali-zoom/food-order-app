@@ -6,6 +6,7 @@ import {
 } from "@/lib/validation/checkoutFormSchema";
 import prisma from "@/lib/prisma";
 import { OrderStatus, PaymentMethod } from "@/constants/enums";
+import { authOptions } from "@/lib/authOptions";
 
 export async function POST(req: NextRequest) {
   try {
@@ -66,7 +67,7 @@ export async function POST(req: NextRequest) {
             data: products.map((p) => ({
               productId: p.id,
               quantity: p.quantity,
-              userId: p.userId ?? null,
+              userId:body.userId ?? null,
             })),
           },
         },
@@ -88,19 +89,19 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// export async function GET() {
-//   const session = await getServerSession(authOptions);
-//   if (!session?.user?.email) {
-//     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-//   }
+export async function GET() {
+  // const session = await getServerSession(authOptions);
+  // if (!session?.user?.email ||  session.user.role !== "ADMIN") {
+  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // }
 
-//   const orders = await prisma.order.findMany({
-//     where: { userEmail: session.user.email },
-//     orderBy: { createdAt: "desc" },
-//     include: {
-//       products: { include: { product: true } },
-//     },
-//   });
+  const orders = await prisma.order.findMany({
+    // where: { userEmail: session.user.email },
+    orderBy: { createdAt: "desc" },
+    include: {
+      products: { include: { product: true } },
+    },
+  });
 
-//   return NextResponse.json(orders);
-// }
+  return NextResponse.json(orders,{status:200});
+}
