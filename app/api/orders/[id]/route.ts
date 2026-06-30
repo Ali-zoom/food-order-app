@@ -1,3 +1,6 @@
+// export const dynamic = "force-dynamic";// if i want no catching
+export const dynamic = "force-static";
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';

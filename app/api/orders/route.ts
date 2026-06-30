@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+
+// export const dynamic = "force-dynamic";// if i want no catching
+export const dynamic = "force-static";import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import {
   CheckoutFormValues,
@@ -7,6 +9,7 @@ import {
 import prisma from "@/lib/prisma";
 import { OrderStatus, PaymentMethod } from "@/constants/enums";
 import { authOptions } from "@/lib/authOptions";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   try {
@@ -76,7 +79,7 @@ export async function POST(req: NextRequest) {
         products: { include: { product: true } },
       },
     });
-
+revalidatePath("/admin/orders");
     return NextResponse.json(order, { status: 201 });
   } catch (error) {
     console.error("Order creation error:", error);

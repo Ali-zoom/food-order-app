@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import React from 'react'
 import OrderList from './_componants/OrderList'
+import { getOrders } from '@/server/db/orders'
 
 const OrdersPage = async() => {
     const session=await getServerSession(authOptions)
@@ -13,13 +14,15 @@ const OrdersPage = async() => {
     if(session.user.role!=="ADMIN"){
         return <div>Unauthorized</div>
     }
-    const orders=await prisma.order.findMany({
-        where:{userEmail:session.user.role!=="ADMIN"? session.user.email: undefined},
-        orderBy:{createdAt:"desc"},
-        include:{
-            products:{include:{product:true}}
-        }
-    })
+
+    const orders=await getOrders(session)
+    // const orders=await prisma.order.findMany({
+    //     where:{userEmail:session.user.role!=="ADMIN"? session.user.email: {}},
+    //     orderBy:{createdAt:"desc"},
+    //     include:{
+    //         products:{include:{product:true}}
+    //     }
+    // })
     
   return (
     <div>
