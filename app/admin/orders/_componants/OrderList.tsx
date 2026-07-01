@@ -24,7 +24,7 @@ const OrderList = ({orders}:{orders:OrderWithRelation[]}) => {
       )}
 
       {orders.map((order) => (
-        <Link className='' href={`/orders/${order.id}`} key={order.id}>
+        <Link  href={`/admin/orders/${order.id}`} key={order.id}>
           <div className="my-2 border rounded-xl p-4 flex justify-between items-center hover:shadow-md transition cursor-pointer">
             <div className="space-y-1">
               <p className="font-semibold">Order #{order.id.slice(-8).toUpperCase()}</p>

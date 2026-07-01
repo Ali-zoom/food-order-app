@@ -16,13 +16,7 @@ const OrdersPage = async() => {
     }
 
     const orders=await getOrders(session)
-    // const orders=await prisma.order.findMany({
-    //     where:{userEmail:session.user.role!=="ADMIN"? session.user.email: {}},
-    //     orderBy:{createdAt:"desc"},
-    //     include:{
-    //         products:{include:{product:true}}
-    //     }
-    // })
+ 
     
   return (
     <div>

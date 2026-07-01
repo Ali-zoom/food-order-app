@@ -73,6 +73,6 @@ export const getSingleProduct = cache(
     });
     return product;
   },
-  ["get-Product-By-Id"],
+   [`product-${crypto.randomUUID()}`],
   { revalidate: 3600 },
 );

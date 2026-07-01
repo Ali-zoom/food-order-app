@@ -14,7 +14,7 @@ export async function proxy(req: NextRequest) {
   const isAdmin = token?.role === UserRole.ADMIN;
 
   const authRoutes = ["/login", "/register"];
-  const protectedRoutes = ["/admin", "/profile"];
+  const protectedRoutes = ["/admin", "/profile","/orders"];
 
   const isAuthRoute = authRoutes.some((r) => pathname.startsWith(r));
   const isProtectedRoute = protectedRoutes.some((r) => pathname.startsWith(r));
