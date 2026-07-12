@@ -14,7 +14,7 @@ export async function proxy(req: NextRequest) {
   const isAdmin = token?.role === UserRole.ADMIN;
 
   const authRoutes = ["/login", "/register"];
-  const protectedRoutes = ["/admin", "/profile","/orders"];
+  const protectedRoutes = ["/admin", "/profile", "/orders"];
 
   const isAuthRoute = authRoutes.some((r) => pathname.startsWith(r));
   const isProtectedRoute = protectedRoutes.some((r) => pathname.startsWith(r));
@@ -46,6 +46,13 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/profile", "/admin", "/register"], // protect all dashboard routes
+  // matcher: ["/login", "/profile", "/admin", "/register"], // protect all dashboard routes
+  matcher: [
+    "/login",
+    "/register",
+    "/profile/:path*",
+    "/admin/:path*",
+    "/orders/:path*",
+  ],
   //   matcher: ["/dashboard/:path*"], // protect all dashboard routes
 };

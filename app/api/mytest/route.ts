@@ -3,6 +3,7 @@ export const dynamic = "force-static";
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { cache } from "@/lib/cache";
+import { cacheLife, cacheTag } from "next/cache";
 
 export const GET = async (request: NextRequest) => {
   try {
@@ -30,3 +31,10 @@ export const getAllUsers = cache(
   ["getUsers"],
   { revalidate: 120, tags: ["getUsers"] },
 );
+
+// async function getAllUsers2() {
+//   "use cache";
+//   cacheTag("getUsers2");
+//   cacheLife({ revalidate: 120 });
+//   return prisma.user.findMany({});
+// }
